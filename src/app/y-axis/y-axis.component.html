@@ -1,0 +1,25 @@
+<!--<ng-template #defaultAxisTemplate let-context>
+	<svg:line [attr.x1]="context.canvasXStart" [attr.y1]="context.height-height" [attr.x1]="context.canvasXStart + context.width" [attr.y2]="context.height-height" ></line>
+	<ng-container *ngFor="let i of utils.range(context.xEnd, context.xStart, step)"
+		[ngTemplateOutlet]="tickTemplate || defaultTickTemplate"
+		[ngTemplateOutletContext]="{ $implicit: {
+			x: context.projectOnCanvas(i), 
+			y: context.height - height,
+			value: i,
+			context: context
+		}}"
+	></ng-container>
+</ng-template>
+
+
+<ng-template #defaultTickTemplate let-point>
+	<svg:line [attr.x1]="point.x" [attr.x2]="point.x" [attr.y1]="point.context.y" [attr.y2]="point.y+20"></line>
+	<svg:text text-anchor="middle" dominant-baseline="hanging" [attr.x]="point.x" [attr.y]="point.y+22">{{ point.value }}</text>
+</ng-template>
+
+<ng-container *ngIf="context"
+  [ngTemplateOutlet]="axisTemplate || defaultAxisTemplate"
+  [ngTemplateOutletContext]="{ $implicit: context}"
+>
+
+</ng-container>-->

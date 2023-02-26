@@ -1,0 +1,20 @@
+:host{
+    /*height: 95vh;*/
+    display: flex;
+	margin-top: 10em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+	overflow-y:scroll;
+}
+jhi-benchmark-chart{
+	margin-left: 10em;
+}
+input{
+	width: 3em;
+}
+
+span{
+	display:block;
+	width: 120px;
+}

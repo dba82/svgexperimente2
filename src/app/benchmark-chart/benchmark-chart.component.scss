@@ -1,0 +1,77 @@
+svg{
+	width: 80vw;
+}
+[jhi-horizontal-lane]{
+	stroke-width: 3;
+	stroke: white;
+}
+[jhi-x-axis] {
+    stroke: silver;
+}
+[jhi-x-axis] text{
+    stroke: none;
+}
+.my-value {
+	fill: blue;
+}
+.my-ambition{
+	fill: orange;
+}
+.quantile-top-10{
+	stroke: orange;
+}
+.median {
+    stroke: black;
+}
+.quantiles-25-75{
+	fill: blue;
+}
+.horizontal-separator{
+	stroke-width: 1;
+	stroke: silver;
+}
+text.name{
+	stroke:none;
+	fill:black;
+	text-anchor: end;
+	dominant-baseline: middle;
+}
+text.info{
+	text-anchor: middle;
+	dominant-baseline: ideographic;
+	stroke:none;
+
+}
+.text-info{
+	height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+	opacity: 80%;
+}
+.dismiss{
+    display: inline-block;
+    padding: 7px;
+    border-radius: 100%;
+    background-color: silver;
+    margin-left: 5px;
+    cursor: pointer;
+	opacity: 100%;
+}
+@keyframes move-rect {
+	0% {
+	  transform: translateX(50px);
+	  opacity: 0;
+	}
+	100% {
+	  transform: translateX(0);
+	  opacity: 100%;
+	}
+  }
+  
+  .quantiles-25-75, .median, .quantile-top-10, .my-ambition, .my-value {
+	animation: move-rect .3s ease-in-out;
+  }

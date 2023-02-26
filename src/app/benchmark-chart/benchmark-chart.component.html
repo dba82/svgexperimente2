@@ -1,0 +1,65 @@
+<svg jhi-chart viewBox="0 0 0 0">	
+	<g jhi-horizontal-context #hContext
+	   [start]="0" 
+	   [end]="5" >
+		<g jhi-x-axis 
+		   [step]="0.5" 
+		   [locale]="'de'">
+		</g>
+		<g 	*ngFor="let item of dataRows; index as i"
+			jhi-horizontal-lane #lane
+			[height] = "50"
+			[x] = "0"
+			[y] = "hContext.laneHeightUpTo(i)"
+			>
+			<text [attr.x]="-20" [attr.y]="lane.y + lane.height/2" class="name">
+				{{item.name}}
+			</text>
+
+			<line class="horizontal-separator" 
+				  [attr.x1]="0" 
+				  [attr.x2]="hContext.width" 
+				  [attr.y1]="lane.y" 
+				  [attr.y2]="lane.y">
+			</line>
+			<g jhi-box class="quantiles-25-75"
+			   [startX]="item.others | quantile: 25" 
+			   [endX]="item.others | quantile: 75">
+			</g>
+			<g jhi-point class="quantile-top-10"
+			[x]="item.others | quantile: 90" 
+			[template]="lineTemplate">
+		 	</g>
+			<g jhi-point class="median"
+			   [x]="item.others | quantile: 50" 
+			   [edgeCases] = "{ medianEqualsTop10 : (item.others | quantile: 50) === (item.others | quantile: 90)}"
+			   [template]="lineTemplate" >
+			</g>
+			<g jhi-point class="my-value"
+			   [x]="item.value" 
+			   [template]="pointTemplate" >
+			</g>
+			<g jhi-point class="my-ambition"
+			   [x]="item.ambition" 
+			   [edgeCases] = "{ valueEqualsAmbition : item.value === item.ambition }"
+			   [template]="pointTemplate" >
+			</g>
+
+			<foreignObject *ngIf="(item.others | quantile: 25) === (item.others | quantile: 75) && lane.displayInfo" 
+				[attr.x]="0" [attr.y]="hContext.laneHeightUpTo(i)" [attr.height]="lane.height" [attr.width]="hContext.width">
+				<body class="text-info">
+					Das 25-Quantil und das 75-Quantil fallen zusammen, deshalb gibt es keine Box zu sehen. <span class="dismiss" (click)="lane.displayInfo = false">OK</span>
+				</body>
+			</foreignObject>
+		</g>
+
+	</g>
+</svg>
+
+
+<ng-template #pointTemplate let-point>
+	<svg:circle [attr.cx]="point.x" [attr.cy]="point.y" [attr.r]="point.edgeCases.valueEqualsAmbition ? 3 : 10"[attr.stroke-width]="point.edgeCases.valueEqualsAmbition ? 0 : 'inherit'"></circle>
+</ng-template>
+<ng-template #lineTemplate let-point>
+	<svg:line  [attr.stroke-dasharray]="point.edgeCases.medianEqualsTop10 ? 4 : 0" [attr.x1]="point.x" [attr.x2]="point.x" [attr.y1]="point.context.y" [attr.y2]="point.context.y + point.context.height" ></line>
+</ng-template>

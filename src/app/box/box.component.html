@@ -1,0 +1,26 @@
+<ng-template #defaultTemplate let-points>
+	<svg:rect 
+		[attr.y]="points.start.y" 
+		[attr.x]="points.start.x"
+		[attr.width]="points.end.x - points.start.x"
+		[attr.height]="points.end.y - points.start.y"  >
+	</svg:rect>
+</ng-template>
+
+
+<ng-container *ngIf="context"
+  [ngTemplateOutlet]="template || defaultTemplate"
+  [ngTemplateOutletContext]="{ $implicit: {
+		start: {
+			x: context.context.projectOnCanvas(startX),
+			y: context.y + context.height * 0.1
+		},
+		end: {
+			x: context.context.projectOnCanvas(endX),
+			y: context.y + context.height * 0.9
+		},
+		context: context
+	}
+}"
+>
+</ng-container>

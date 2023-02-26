@@ -1,0 +1,15 @@
+<ng-template #defaultTemplate let-point>
+	<svg:circle [attr.cy]="point.y" [attr.cx]="point.x" r="10"></svg:circle>
+</ng-template>
+
+
+<ng-container *ngIf="context"
+  [ngTemplateOutlet]="template || defaultTemplate"
+  [ngTemplateOutletContext]="{ $implicit: {
+		x: context.context.projectOnCanvas(x), 
+		y: context.y + context.height * 0.5,
+		context: context,
+		edgeCases: edgeCases
+	}
+}">
+</ng-container>

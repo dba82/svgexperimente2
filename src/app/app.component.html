@@ -1,0 +1,8 @@
+<details>
+  <form *ngFor="let row of data.slice(0,6); index as j">
+    <span>{{row.name}}</span>
+    <input style="background:blue; color: white" type="number"  min="0" max="5" step="0.1" [value]="row.value" (change)="changeValue(j, +t1.value)" #t1>
+    <input *ngFor="let item of row.others; index as i" type="number" min="0" max="5" step="0.1" [value]="item" (change)="change(j,i, +t.value)" #t>
+  </form>
+  </details>
+<jhi-benchmark-chart [dataRows]="data"></jhi-benchmark-chart>
